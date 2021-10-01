@@ -1,0 +1,47 @@
+
+
+/* #game {
+display: flex; #e66465
+} */
+
+body {
+background : linear-gradient(#483D8B, #9198e5);
+background-repeat: no-repeat ;
+height : 100vh;
+}
+
+section {
+margin-left: 20%;
+}
+
+h2 {
+font-family: cursive;
+color: #81EE81;
+}
+
+canvas {
+width : 500;
+height : 50vh;
+border:1px solid #81EE81;
+border-radius: 5px;
+}
+
+button {
+color: #81EE81;
+background-color:mediumpurple;
+border-radius: 7px;
+font-family: cursive;
+}
+
+.currentWord  {
+margin-top: 5vh;
+margin-left: 200px ;
+color: white;
+font-family: cursive;
+}
+
+#infos {
+color: white;
+font-family: cursive;
+}
+
