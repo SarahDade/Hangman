@@ -1,104 +1,43 @@
 
-    <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hangman</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap" rel="stylesheet">
-    <link rel="preconne ct" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
-</head>
-<body>
-<!----------------------------------------------Select a topic to begin the game------------------------------------------------->
-    <section id="game"> 
-        <div id="topics">
-            <div class="description">
-                <h2>Choose one of the following topic</h2>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Hangman</title>
+        <link rel="stylesheet" href="style.css">
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap" rel="stylesheet">
+        <link rel="preconne ct" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    </head>
+        <body>
+            <div class="container">
+                <div class="hangman-draw">
+                    <div class = "draw">
+                        <div class="gallow"></div>
+                        <div class="hang"></div>
+                        <div class="rope"></div>
+                        <div class="head"></div>
+                        <div class="body"></div>
+                        <div class="hands"></div>
+                        <div class="legs"></div>
+                    </div>
+                </div>
+                <div class= "game-state">
+                    <div class="hangman"></div>
+                    <div class="category">
+                        <span></span>                        
+                    </div>
+                    <div>
+                        <button onClick="window.location.reload();"class="playAgain">Play again</button>
+                    </div>
+                    <div class="letters"></div>
+                    <div class="letters-guess"></div>
+                </div>
             </div>
-            <div class="categories">
-                <button class="movies">Movies</button>
-                <button class="capitals">Capitals</button>
-                <button class="adjectives">Adjectives</button>
-            </div> 
-        </div>
-<!------------------------------------------------------Playing------------------------------------------------------------------->      
-        <div class="userInput">
-            <div class="keyOne">
-                <button class="q" value="q">Q</button>
-                <button class="w" value="w">W</button>
-                <button class="e" value="e">E</button>
-                <button class="r" value="r">R</button>
-                <button class="t" value="t">T</button>
-                <button class="y" value="y">Y</button>
-                <button class="u" value="u">U</button>
-                <button class="i" value="i">I</button>
-                <button class="o" value="o">O</button>
-                <button class="p" value="p">P</button>
-            </div> 
-            <div class="keyTwo">
-                <button class="a" value="a">A</button>
-                <button class="s" value="s">S</button>
-                <button class="d" value="d">D</button>
-                <button class="f" value="f">F</button>
-                <button class="g" value="g">G</button>
-                <button class="h" value="h">H</button>
-                <button class="j" value="j">J</button>
-                <button class="k" value="k">K</button>
-                <button class="l" value="l">L</button>
-            </div>
-            <div class="keyThree">
-                <button class="z" value="z">Z</button>
-                <button class="x" value="x">X</button>
-                <button class="c" value="c">C</button>
-                <button class="v" value="v">V</button>
-                <button class="b" value="b">B</button>
-                <button class="n" value="n">N</button>
-                <button class="m" value="m">M</button>
-            </div>
-        </div>                 
-        <span id="infos">
-            <div class="guessesLeft">Guesses left: <span> 10 </span></div>
-            <div class="guessed">Guessed letters: <span> </span></div>
-        </span>
-        <div class="currentWord">
-            <span></span>
-        </div>
-        <div class="hangman">
-            <canvas id="playerState">
-                <svg width="210" height="210" xmlns="http://www.w3.org/2000/svg">                 
-                    <g stroke="null">
-                     <title>background</title>
-                     <rect x="-1" y="-1" width="212" height="212" id="canvas_background" stroke="null"/>
-                     <g id="canvasGrid" display="none" stroke="null">
-                      <rect id="svg_1" width="100%" height="100%" x="0" y="0" stroke-width="0" fill="url(#gridpattern)"/>
-                     </g>
-                    </g>
-                    <g stroke="null">
-                     <title>Layer 1</title>
-                     <rect stroke="#000" class="gallow" fill="#B9FFCE" stroke-width="0" x="45.31816" y="15.45313" width="5" height="183" id="svg_4"/>
-                     <rect stroke="#000" class="gallow" fill="#B9FFCE" stroke-width="0" stroke-opacity="null" x="5.0242" y="195.99992" width="123.5334" height="5.6" id="svg_5"/>
-                     <rect stroke="#000" class="gallow" fill="#B9FFCE" stroke-width="0" stroke-opacity="null" x="45.8182" y="12.99997" width="101.79999" height="5.6" id="svg_7"/>
-                     <rect stroke="#000" class="gallow" fill="#B9FFCE" stroke-width="0" stroke-opacity="null" x="140.62423" y="13.75755" width="7.2" height="41.52731" id="svg_17"/>
-                     <ellipse stroke="#000" class="head" fill="#B9FFCE" stroke-width="0" stroke-opacity="null" cx="144.24857" cy="63.78917" id="svg_18" rx="13.00608" ry="12.80002"/>
-                     <rect stroke="#000" class="neck" fill="#B9FFCE" stroke-width="0" x="143.06048" y="72.23257" width="2.4" height="23.0788" id="svg_32"/>
-                     <rect transform="rotate(139.71775817871094 136.7581787109375,85.96707153320314) " stroke="#000" class="left_arm" fill="#B9FFCE" stroke-width="0" x="135.5082" y="74.90763" width="2.49995" height="22.11887" id="svg_36"/>
-                     <rect stroke="#000" class="torso" fill="#B9FFCE" stroke-width="0" stroke-opacity="null" fill-opacity="null" x="143.34801" y="94.23871" width="2.08696" height="20.48228" id="svg_38"/>
-                     <rect transform="rotate(38.08864974975586 151.6085357666016,85.35657501220703) " stroke="#000" class="right_arm" fill="#B9FFCE" stroke-width="0" x="150.35855" y="73.68631" width="2.49995" height="23.34053" id="svg_34"/>
-                     <rect transform="rotate(-146.4536590576172 137.6775360107422,123.99925231933595) " stroke="#000" class="left_leg" fill="#B9FFCE" stroke-width="0" x="136.42756" y="111.37273" width="2.49995" height="25.25304" id="svg_41"/>
-                     <rect transform="rotate(-30.7056827545166 150.40476989746102,123.9992446899414) " stroke="#000" class="right_leg" fill="#B9FFCE" stroke-width="0" x="149.15481" y="111.37273" width="2.49995" height="25.25304" id="svg_2"/>
-                    </g>
-                </svg>
-            </canvas>         
-        </div>
-        <div class="endGame">
-            <p class="lost"></p>
-            <p class="win"></p>
-            <button class="playAgain"><a href=index.html>PLAY AGAIN</a></button>
-        </div>
-    </section>
+        </body>
+</html>
 
 <script src="hangman.js"></script>
 </body>

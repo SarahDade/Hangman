@@ -1,216 +1,199 @@
 
+const letters = "qwertyuiopasdfghjklzxcvbnm";
 
-//define variables//
+let lettersArray = Array.from(letters);
 
-let movies = [
+// word
 
-'django',
-'fight club',
-'pretty woman',
-'matrix',
-'starwars',
-'the godfather',
-'the lord of the rings',
-'the dark knight',
-'gladiator',
-'ted',
-'alexander the great',
-'rocky balboa',
-'shutter island',
-'the great gatsby',
-'inception',
-'very bad trip',
-'harry potter',
-'ET',
-'mamma mia',
-'schrek',
-'grease',
+let lettersContainer = document.querySelector(".letters");
 
-];
+lettersArray.forEach(letter => {
 
-let capitals = [
+  let span = document.createElement("span");
 
-'abidjan',
-'addis ababa',
-'amsterdam',
-'athens',
-'berlin',
-'bagdad',
-'bogota',
-'brussels',
-'cambera',
-'cairo',
-'caracas',
-'damas',
-'dakkar',
-'djibouti',
-'kuala lumpur',
-'lisbon',
-'nairobi',
-'ottawa',
-'porto novo',
-'roma',
-'tokyo',
+  let TheLetter = document.createTextNode(letter);
 
-];
+  span.appendChild(TheLetter);
 
-let adjectives = [
+  span.className = "letter-box";
 
-'accurate',
-'ambitious',
-'available',
-'competitive',
-'credible',
-'careful',
-'demanding',
-'dynamic',
-'easygoing',
-'efficient',
-'friendly',
-'funny',
-'helpful',
-'humble',
-'loyal',
-'openminded',
-'reliable',
-'skilled',
-'smart',
-'successful',
-'useful',
+  lettersContainer.appendChild(span);
 
-]
+});
 
-   // settings variable // 
+// categories //
 
-   let categories = document.querySelectorAll(".categories button");
+const words = {
 
-   let inputLetter = document.querySelectorAll(".userInput button");
+  MOVIES: [
+
+    'django',
+    'fight club',
+    'pretty woman',
+    'matrix',
+    'starwars',
+    'the godfather',
+    'the lord of the rings',
+    'the dark knight',
+    'gladiator',
+    'ted',
+    'alexander the great',
+    'rocky balboa',
+    'shutter island',
+    'the great gatsby',
+    'inception',
+    'very bad trip',
+    'harry potter',
+    'et',
+    'mamma mia',
+    'schrek',
+    'grease'
+  ],
+
+  CAPITALS: [
+
+    'abidjan',
+    'addis ababa',
+    'amsterdam',
+    'athens',
+    'berlin',
+    'bagdad',
+    'bogota',
+    'brussels',
+    'cambera',
+    'cairo',
+    'caracas',
+    'damas',
+    'dakkar',
+    'djibouti',
+    'kuala lumpur',
+    'lisbon',
+    'nairobi',
+    'ottawa',
+    'porto novo',
+    'roma',
+    'tokyo'
+  ],
+
+  ADJECTIVES: [
+
+    'accurate',
+    'ambitious',
+    'available',
+    'competitive',
+    'credible',
+    'careful',
+    'demanding',
+    'dynamic',
+    'easygoing',
+    'efficient',
+    'friendly',
+    'funny',
+    'helpful',
+    'humble',
+    'loyal',
+    'openminded',
+    'reliable',
+    'skilled',
+    'smart',
+    'successful',
+    'useful'
+  ],
+
+}
 
 
-  // function to select the randomWord from the category chosen by the user //
+// Defining a random word //
 
-    let wordSelector = (category) => {
-    let random = Math.floor(Math.random() * category.length);
-    newWord = category[random]
-    let randomWord = newWord.split(" ").join("");     //remove spaces between words//
-    console.log(randomWord)
+let allKeys = Object.keys(words);
 
-    let guesses = 10;
-    let guessedLetters = [];
+let randomIndex = Math.floor(Math.random() * allKeys.length);
+let randomCategory = allKeys[randomIndex];
+let randomValues = words[randomCategory];
 
-    // display the '_' letters of the hidden word //
+let randomWord = Math.floor(Math.random() * randomValues.length);
 
-    let answerArr = [];
-    for (let i = 0; i < randomWord.length; i ++) {
-            answerArr[i] = '_';
-        }
+let word = (randomValues[randomWord])
 
-    let remainLetters = randomWord.length;
+console.log(word);
 
-    document.querySelector('.currentWord').querySelector('span').innerHTML = answerArr;
+// show categories //
 
-        
-    // User clicks on a letter => the game starts //
+document.querySelector(".game-state .category span").innerHTML = randomCategory;
 
-    let currentLetter =  " ";
+// Select input //
 
-    function check() {
+let guessContainer = document.querySelector(".letters-guess");
 
-      while (remainLetters > 0) {
-        // Update the game state with the guess
-          for (var j = 0; j < randomWord.length; j++) {
-            if (currentLetter[j] === randomWord[j]) {
-            answerArr[j] = randomWord[j] ;
-            remainLetters--;
-            guesses--;
-            }
-          }
-        }
+let wordLetters = Array.from(word);
+
+console.log(wordLetters);
+
+//display hidden word//
+
+let answerArr = [];
+for (let i = 0; i < wordLetters.length; i++) {
+  answerArr[i] = '_';
+}
+
+guessContainer.innerHTML = answerArr;
+
+let wrongAttempts = 0;
+
+let draw = document.querySelector(".hangman-draw")
+
+let playAgain = document.querySelector(".PlayAgain")
+
+    //click event//
+
+function refreshPage(){
+  window.location.reload();
+} 
+
+document.addEventListener("click", (e) => {
+  console.log(e.target)
+
+  if (e.target.className === 'letter-box') {
+
+      e.target.classList.add("clicked");
+
+      let clickedLetter = e.target.innerHTML.toLowerCase();
+
+      let theStatus = false;
+
+      for (let i = 0; i < wordLetters.length; i++) {
+
+        if (clickedLetter === wordLetters[i]) {
+
+            theStatus = true;
+
+            console.log(` found At ${i}`);
+            answerArr[i] = wordLetters[i];
+
+            guessContainer.innerHTML = answerArr;
+
+            if (JSON.stringify(answerArr) === JSON.stringify(wordLetters)) {
+              alert("Congrats, you won !")
+              refreshPage()
+            }           
+        } 
+
       }
 
+      if (theStatus !== true) {
 
-
-
-
-
-
-
-      
-
-    for (let i = 0; i < 26; i++) {           
-    inputLetter[i].addEventListener('click', () => {       
-        inputLetter[i].style.cssText = "opacity: 1; border: solid #B9FFCE 2px";
-        currentLetter = inputLetter[i].value
-        console.log(currentLetter);
-    });
-
-    }
-
-    document.querySelector('.guessesLeft').querySelector('span').innerHTML = guesses;
-
-    document.querySelector('.guessed').querySelector('span').innerHTML = guessedLetters;
-
-};
-
-
-
-    let gallow = document.querySelectorAll("g .gallow")
-
-    let hangingGuy = document.querySelectorAll("g rect");
-
-
-  //   if (wrongLetters.length === 1) {
-  //     for (let i = 0; i < gallow.length; i++) {
-  //         gallow[i].style.display = "block";
-  //     }
-  // } else if (wrongLetters.length === 2) {
-  //     document.querySelector(".head").style.display = "block";
-  // } else if (wrongLetters.length === 3) {
-  //     document.querySelector(".neck").style.display = "block";
-  // } else if (wrongLetters.length === 4) {
-  //     document.querySelector(".right_arm").style.display = "block";
-  // } else if (wrongLetters.length === 5) {
-  //     document.querySelector(".left_arm").style.display = "block";
-  // } else if (wrongLetters.length === 6) {
-  //     document.querySelector(".torso").style.display = "block";
-  // } else if (wrongLetters.length === 7) {
-  //     document.querySelector(".right_leg").style.display = "block";
-  // } else if (wrongLetters.length === 8) {
-  //     document.querySelector(".left_leg").style.display = "block";
-  //     lose.style.display = "block";
-  //     for(let i = 0; i < currentWord.length; i++){
-  //         currentWordArr[i].innerHTML = currentWord[i].toUpperCase();
-  //         currentWordArr[i].style.color = "grey";
-  //     };
-
-   
-
-         // activate game onclick functions //
-
-                    
-        categories[0].addEventListener('click', () => {
-            wordSelector(movies);
-            // categoryAll();
-            categories[0].style.cssText = "opacity: 1; border: solid #B9FFCE 2px";
-            categories[1].style.cssText = "opacity: .5; border: solid #B9FFCE 1px";
-            categories[2].style.cssText = "opacity: .5; border: solid #B9FFCE 1px";
-        });
+        wrongAttempts ++;
         
-        categories[1].addEventListener('click', () => {
-          wordSelector(capitals);
-        //   categoryAll();
-          categories[1].style.cssText = "opacity: 1; border: solid #B9FFCE 2px";
-          categories[0].style.cssText = "opacity: .5; border: solid #B9FFCE 1px";
-          categories[2].style.cssText = "opacity: .5; border: solid #B9FFCE 1px";
-        });
-        
-        categories[2].addEventListener('click', () => {
-          wordSelector(adjectives);
-        //   categoryAll();
-          categories[2].style.cssText = "opacity: 1; border: solid #B9FFCE 2px";
-          categories[0].style.cssText = "opacity: .5; border: solid #B9FFCE 1px";
-          categories[1].style.cssText = "opacity: .5; border: solid #B9FFCE 1px";
-        });
-        
-        // document.querySelector("").addEventListener("click", newGame());
+        draw.classList.add(`wrong-${wrongAttempts}`)
+
+        if (wrongAttempts === 8) {
+          alert("GAME OVER")
+          refreshPage()
+        }
+
+      } 
+
+  }
+
+});
 
