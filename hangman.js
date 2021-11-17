@@ -28,32 +28,20 @@ const words = {
   MOVIES: [
 
     'django',
-    'fight club',
-    'pretty woman',
     'matrix',
     'starwars',
-    'the godfather',
-    'the lord of the rings',
-    'the dark knight',
     'gladiator',
     'ted',
-    'alexander the great',
-    'rocky balboa',
-    'shutter island',
-    'the great gatsby',
     'inception',
-    'very bad trip',
-    'harry potter',
     'et',
-    'mamma mia',
     'schrek',
     'grease'
+
   ],
 
   CAPITALS: [
 
     'abidjan',
-    'addis ababa',
     'amsterdam',
     'athens',
     'berlin',
@@ -66,11 +54,9 @@ const words = {
     'damas',
     'dakkar',
     'djibouti',
-    'kuala lumpur',
     'lisbon',
     'nairobi',
     'ottawa',
-    'porto novo',
     'roma',
     'tokyo'
   ],
