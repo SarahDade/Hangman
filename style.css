@@ -15,7 +15,7 @@ display: flex;
 }
 
 .hangman-draw {
-    background-image: url('blackboard.png');
+    background-image: url('./assets/blackboard.png');
     background-size: 800px;
     background-position: center;
     background-repeat: no-repeat ;
